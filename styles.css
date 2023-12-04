@@ -65,3 +65,25 @@ select {
     display: inline-block;
     align-items: flex-start;
 }
+
+
+/* Make table rows clickable */
+#search-results tbody tr:hover {
+    cursor: pointer;
+    background-color: #f5f5f5;
+}
+
+/* Hide the Single Song View by default */
+#single-song-view {
+    display: none;
+}
+
+/* Show the Single Song View when it has the 'show' class */
+#single-song-view.show {
+    display: block;
+}
+
+/* Hide the song list when Single Song View is active */
+#search-results.hide {
+    display: none;
+}
