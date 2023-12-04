@@ -66,6 +66,14 @@ select {
     align-items: flex-start;
 }
 
+#search-results table {
+    width: 100%;
+}
+
+#search-results th, #search-results td {
+    padding: 10px;  
+    text-align: left;
+}
 
 /* Make table rows clickable */
 #search-results tbody tr:hover {

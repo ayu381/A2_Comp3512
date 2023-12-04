@@ -73,9 +73,25 @@ function displaySongs(songsToDisplay) {
         row.appendChild(createCell(song.year));
         row.appendChild(createCell(song.genre.name));
         row.appendChild(createCell(song.details.popularity));
-    
+
+        // Add button cell
+        const addToPlaylistCell = document.createElement("td");
+        const addToPlaylistButton = document.createElement("button");
+        addToPlaylistButton.textContent = "Add";
+        addToPlaylistButton.addEventListener("click", function () {
+            addToPlaylist(song); 
+        });
+        addToPlaylistCell.appendChild(addToPlaylistButton);
+        row.appendChild(addToPlaylistCell);
+
         tableBody.appendChild(row);
     });
+}
+
+function addToPlaylist(song) {
+    // Implement the logic to add the song to the playlist
+    // For example, you can store the selected songs in an array or perform any other desired action
+    console.log("Adding to playlist:", song.title);
 }
 
 // Function to create cell for each row - then appended above
