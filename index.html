@@ -51,7 +51,10 @@
                 <!-- Genre options will be here -->
             </select>
             
+            <!-- Search and clear buttons -->
             <button id="search-button">Search</button>
+            <br>
+            <button id="clear-button">Clear</button>
         </section>
 
         <!--Search results-->
@@ -60,11 +63,11 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Artist</th>
-                        <th>Year</th>
-                        <th>Genre</th>
-                        <th>Popularity</th>
+                        <th id = "title-th" class="sortable" >Title</th>
+                        <th id = "artist-th" class="sortable" >Artist</th>
+                        <th id = "year-th" class="sortable">Year</th>
+                        <th id = "genre-th" class="sortable">Genre</th>
+                        <th id = "popularity-th" class="sortable">Popularity</th>
                         <th>Add To Playlist</th>
                     </tr>
                 </thead>

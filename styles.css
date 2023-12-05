@@ -59,6 +59,10 @@ select {
     width: 10%;
 }
 
+#clear-button {
+    width: 10%;
+}
+
 #radioButtons {
     margin-left: 5px;
     margin-bottom: 15px;
@@ -73,6 +77,16 @@ select {
 #search-results th, #search-results td {
     padding: 10px;  
     text-align: left;
+}
+
+/* Make table headers clickable */
+th.sortable {
+    cursor: pointer;
+    user-select: none; /* Prevent text selection while clicking */
+}
+
+th.sortable.desc::after {
+    content: ' ▼'; /* Unicode arrow character for descending order */
 }
 
 /* Make table rows clickable */

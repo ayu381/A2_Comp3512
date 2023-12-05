@@ -1,7 +1,7 @@
 // JSON parsing for each file given
 const artists = JSON.parse(artistContent);
 const genres = JSON.parse(genreContent);
-const api = 'https://www.randyconnolly.com/funwebdev/3rd/api/music/songs-nested.php';
+
 
 // Variables for event listeners
 var songSearch = document.getElementById('song-search');
@@ -64,22 +64,19 @@ function songDisplay() {
             })
             .catch(error => console.error('Error fetching data:', error));
     }
+
 }
 
-// Sorting function
+// Global variable for sortOrder
+let sortOrder = 'asc';
+
+// Sorting function for song
 function sortSongs(songsSorted) {
     return songsSorted.sort((a, b) => {
-        const artistA = a.artist.name.toUpperCase();
-        const artistB = b.artist.name.toUpperCase();
-        if (artistA < artistB) {
-            return -1;
-        }
-        if (artistA > artistB) {
-            return 1;
-        }
         const titleA = a.title.toUpperCase();
         const titleB = b.title.toUpperCase();
-        return titleA.localeCompare(titleB);
+
+        return sortOrder === 'asc' ? titleA.localeCompare(titleB) : titleB.localeCompare(titleA);
     });
 }
 
@@ -182,6 +179,8 @@ function filterSongs() {
     const storedData = localStorage.getItem('songData');
     const songs = storedData ? JSON.parse(storedData) : [];
 
+    const sortedSongs = sortSongs(songs);
+
     const filteredSongs = songs.filter(song =>
         (!selectedArtist || song.artist.name === selectedArtist) &&
         (!selectedGenre || song.genre.name === selectedGenre) &&
@@ -191,9 +190,30 @@ function filterSongs() {
     displayFilteredSongs(filteredSongs);
 }
 
+// Click event listeners for headers
+const titleTh = document.getElementById("title-th");
+const artistTh = document.getElementById("artist-th");
+const yearTh = document.getElementById("year-th");
+const genreTh = document.getElementById("genre-th");
+const popularityTh = document.getElementById("popularity-th");
+
+titleTh.addEventListener('click', function () {
+    toggleSortOrder(); 
+    filterSongs(); 
+});
+
+function toggleSortOrder() {
+    // Toggle between 'asc' and 'desc'
+    sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+}
+
 // Call all functions when the window is loaded
 window.onload = function () {
     songDisplay();
     artistOptions();
     genreOptions();
 };
+
+
+
+
