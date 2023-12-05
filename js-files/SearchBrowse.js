@@ -3,6 +3,38 @@ const artists = JSON.parse(artistContent);
 const genres = JSON.parse(genreContent);
 const api = 'https://www.randyconnolly.com/funwebdev/3rd/api/music/songs-nested.php';
 
+// Variables for event listeners
+var songSearch = document.getElementById('song-search');
+var artistSelect = document.getElementById('artist-select');
+var genreSelect = document.getElementById('genre-select');
+
+var titleOption = document.getElementById('title-option');
+var artistOption = document.getElementById('artist-option');
+var genreOption = document.getElementById('genre-option');
+
+// Initially disable artist and genre select forms before using their respective radio buttons
+artistSelect.disabled = true;
+genreSelect.disabled = true;
+
+// Event listeners for radio buttons
+titleOption.addEventListener('change', function () {
+    songSearch.disabled = false;
+    artistSelect.disabled = true;
+    genreSelect.disabled = true;
+});
+
+artistOption.addEventListener('change', function () {
+    songSearch.disabled = true;
+    artistSelect.disabled = false;
+    genreSelect.disabled = true;
+});
+
+genreOption.addEventListener('change', function () {
+    songSearch.disabled = true;
+    artistSelect.disabled = true;
+    genreSelect.disabled = false;
+});
+
 // Function to populate rows with song data
 function songDisplay() {
 
