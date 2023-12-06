@@ -37,34 +37,34 @@ genreOption.addEventListener('change', function () {
 
 // Function to populate rows with song data
 function songDisplay() {
-
     // Check if data is in local storage
     const storedData = localStorage.getItem('songData');
     if (storedData) {
-    
         // Parse stored data
         const localData = JSON.parse(storedData);
-        
+
         // Sort
         const sortedLocalData = sortSongs(localData);
         displaySongs(sortedLocalData);
 
-    // Fetch data from API
+        // Display the original data after sorting
+        displaySongs(originalData);
     } else {
-        fetch (api)
+        fetch(api)
             .then(response => response.json())
             .then(data => {
-
                 // Sort
                 const sortedApiData = sortSongs(data);
                 displaySongs(sortedApiData);
-                
+
                 // Save data to local storage
                 localStorage.setItem('songData', JSON.stringify(data));
+
+                // Display the original data after fetching and sorting
+                displaySongs(originalData);
             })
             .catch(error => console.error('Error fetching data:', error));
     }
-
 }
 
 // Global variable for sortOrder
@@ -197,7 +197,28 @@ const yearTh = document.getElementById("year-th");
 const genreTh = document.getElementById("genre-th");
 const popularityTh = document.getElementById("popularity-th");
 
+
 titleTh.addEventListener('click', function () {
+    toggleSortOrder(); 
+    filterSongs(); 
+}); 
+
+artistTh.addEventListener('click', function () {
+    toggleSortOrder(); 
+    filterSongs(); 
+});
+
+yearTh.addEventListener('click', function () {
+    toggleSortOrder(); 
+    filterSongs(); 
+});
+
+genreTh.addEventListener('click', function () {
+    toggleSortOrder(); 
+    filterSongs(); 
+});
+
+popularityTh.addEventListener('click', function () {
     toggleSortOrder(); 
     filterSongs(); 
 });
@@ -207,13 +228,34 @@ function toggleSortOrder() {
     sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
 }
 
+// Event listener for clearing table data
+document.getElementById("clear-button").addEventListener("click", clearFormAndTable);
+
+function clearFormAndTable() {
+    // Clear the text input
+    songSearch.value = '';
+
+    // Reset radio buttons to default
+    titleOption.checked = true;
+    artistOption.checked = false;
+    genreOption.checked = false;
+
+    // Disable and reset select elements
+    artistSelect.disabled = true;
+    genreSelect.disabled = true;
+    artistSelect.selectedIndex = 0;
+    genreSelect.selectedIndex = 0;
+
+    // Reset the sorting order to 'asc'
+    sortOrder = 'asc';
+
+    // Call filterSongs to refresh the displayed data with the originalData
+    filterSongs();
+}
+
 // Call all functions when the window is loaded
 window.onload = function () {
-    songDisplay();
     artistOptions();
     genreOptions();
+    songDisplay(); 
 };
-
-
-
-

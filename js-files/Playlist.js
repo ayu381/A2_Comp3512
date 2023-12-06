@@ -3,3 +3,4 @@
 
 // Set the display property to "none" to hide the element
 //playlistView.style.display = "none";
+

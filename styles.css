@@ -85,8 +85,13 @@ th.sortable {
     user-select: none; /* Prevent text selection while clicking */
 }
 
-th.sortable.desc::after {
-    content: ' ▼'; /* Unicode arrow character for descending order */
+/* Add an indicator to the sorted column */
+.sortable.sorted-asc #title-th::before {
+    content: ' ▲'; /* Upward arrow */
+}
+
+.sortable.sorted-desc #title-th::before {
+    content: ' ▼'; /* Downward arrow */
 }
 
 /* Make table rows clickable */
