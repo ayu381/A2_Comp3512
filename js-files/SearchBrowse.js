@@ -35,6 +35,9 @@ genreOption.addEventListener('change', function () {
     genreSelect.disabled = false;
 });
 
+/// Define originalData as an empty array initially
+let originalData = [];
+
 // Function to populate rows with song data
 function songDisplay() {
     // Check if data is in local storage
@@ -47,8 +50,8 @@ function songDisplay() {
         const sortedLocalData = sortSongs(localData);
         displaySongs(sortedLocalData);
 
-        // Display the original data after sorting
-        displaySongs(originalData);
+        // Update originalData with the sorted data
+        originalData = sortedLocalData;
     } else {
         fetch(api)
             .then(response => response.json())
@@ -60,24 +63,11 @@ function songDisplay() {
                 // Save data to local storage
                 localStorage.setItem('songData', JSON.stringify(data));
 
-                // Display the original data after fetching and sorting
-                displaySongs(originalData);
+                // Update originalData with the sorted data
+                originalData = sortedApiData;
             })
             .catch(error => console.error('Error fetching data:', error));
     }
-}
-
-// Global variable for sortOrder
-let sortOrder = 'asc';
-
-// Sorting function for song
-function sortSongs(songsSorted) {
-    return songsSorted.sort((a, b) => {
-        const titleA = a.title.toUpperCase();
-        const titleB = b.title.toUpperCase();
-
-        return sortOrder === 'asc' ? titleA.localeCompare(titleB) : titleB.localeCompare(titleA);
-    });
 }
 
 // Function to display filtered songs
@@ -179,9 +169,21 @@ function filterSongs() {
     const storedData = localStorage.getItem('songData');
     const songs = storedData ? JSON.parse(storedData) : [];
 
-    const sortedSongs = sortSongs(songs);
+    let sortedSongs = sortSongs(songs, 'title', sortTitleOrder);
 
-    const filteredSongs = songs.filter(song =>
+    if (sortArtistOrder === 'desc') {
+        sortedSongs = sortSongs(sortedSongs, 'artist', 'desc');
+    }
+
+    if (sortGenreOrder === 'desc') {
+        sortedSongs = sortSongs(sortedSongs, 'genre', 'desc');
+    }
+
+    if (sortYearOrder === 'desc') {
+        sortedSongs = sortSongs(sortedSongs, 'year', 'desc');
+    }
+
+    const filteredSongs = sortedSongs.filter(song =>
         (!selectedArtist || song.artist.name === selectedArtist) &&
         (!selectedGenre || song.genre.name === selectedGenre) &&
         (!typedTitle || song.title.toLowerCase().startsWith(typedTitle))
@@ -197,38 +199,91 @@ const yearTh = document.getElementById("year-th");
 const genreTh = document.getElementById("genre-th");
 const popularityTh = document.getElementById("popularity-th");
 
+// Global variables for ordering
+let sortTitleOrder = 'asc';
+let sortArtistOrder = 'asc';
+let sortYearOrder = 'asc';
+let sortGenreOrder = 'asc';
+let sortPopularityOrder = 'asc';
+
+// Sorting functions for songs
+function sortSongs(songsSorted, sortBy, sortOrder) {
+    return songsSorted.sort((a, b) => {
+        const valueA = getValue(a, sortBy);
+        const valueB = getValue(b, sortBy);
+
+        if (sortBy === 'artist') {
+            // For artist sorting, consider both artist and title
+            const artistComparison = valueA.localeCompare(valueB);
+            if (artistComparison === 0) {
+                return sortOrder === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
+            }
+            return sortOrder === 'asc' ? artistComparison : -artistComparison;
+        }
+
+        // Use localeCompare for string comparison
+        return sortOrder === 'asc' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
+    });
+}
+
+function getValue(song, sortBy) {
+    if (sortBy === 'title') {
+        return song.title ? song.title.toUpperCase() : '';
+    } else if (sortBy === 'artist') {
+        return song.artist && song.artist.name ? song.artist.name.toUpperCase() : '';
+    } else if (sortBy === 'genre') {
+        return song.genre && song.genre.name ? song.genre.name.toUpperCase() : '';
+    }
+
+    // Add additional cases for other sorting criteria if needed
+    return '';
+}
+
+function toggleSortOrder(sortBy) {
+    if (sortBy === 'title') {
+        sortTitleOrder = sortTitleOrder === 'asc' ? 'desc' : 'asc';
+        sortArtistOrder = 'asc';
+        sortGenreOrder = 'asc'; // Reset genre order when sorting by title
+    } else if (sortBy === 'artist') {
+        sortArtistOrder = sortArtistOrder === 'asc' ? 'desc' : 'asc';
+        sortTitleOrder = 'asc';
+        sortGenreOrder = 'asc'; // Reset genre order when sorting by artist
+    } else if (sortBy === 'genre') {
+        sortGenreOrder = sortGenreOrder === 'asc' ? 'desc' : 'asc';
+        sortTitleOrder = 'asc';
+        sortArtistOrder = 'asc'; // Reset artist order when sorting by genre
+    }
+}
 
 titleTh.addEventListener('click', function () {
-    toggleSortOrder(); 
-    filterSongs(); 
-}); 
+    toggleSortOrder('title');
+    filterSongs();
+});
 
 artistTh.addEventListener('click', function () {
-    toggleSortOrder(); 
-    filterSongs(); 
+    toggleSortOrder('artist');
+    filterSongs();
 });
 
 yearTh.addEventListener('click', function () {
-    toggleSortOrder(); 
+    toggleSortOrder('year'); 
     filterSongs(); 
 });
 
 genreTh.addEventListener('click', function () {
-    toggleSortOrder(); 
+    toggleSortOrder('genre'); 
     filterSongs(); 
 });
+
+/*
 
 popularityTh.addEventListener('click', function () {
     toggleSortOrder(); 
     filterSongs(); 
 });
+*/
 
-function toggleSortOrder() {
-    // Toggle between 'asc' and 'desc'
-    sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
-}
-
-// Event listener for clearing table data
+// Event listening for clearing table data
 document.getElementById("clear-button").addEventListener("click", clearFormAndTable);
 
 function clearFormAndTable() {
@@ -246,16 +301,23 @@ function clearFormAndTable() {
     artistSelect.selectedIndex = 0;
     genreSelect.selectedIndex = 0;
 
-    // Reset the sorting order to 'asc'
-    sortOrder = 'asc';
+    // Reset the sorting order to original state
+    sortTitleOrder = 'asc';
+    sortArtistOrder = 'asc';
 
     // Call filterSongs to refresh the displayed data with the originalData
     filterSongs();
 }
 
-// Call all functions when the window is loaded
+// Call all functions when window is loaded
 window.onload = function () {
+    // Set the initial sorting order for title
+    sortTitleOrder = 'asc';  
     artistOptions();
     genreOptions();
-    songDisplay(); 
+
+    // Load the songs and sort them by title
+    songDisplay();
+    
+    filterSongs();  // Apply sorting and filtering based on the initial state
 };
