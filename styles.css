@@ -85,30 +85,57 @@ th.sortable {
     user-select: none; 
 }
 
-/* Add triangle for indicating sort order */
+/* Add arrow for indicating sort order */
+.sortable {
+    position: relative;
+    
+}
+
 .sortable::after {
     content: '';
     display: inline-block;
-    margin-left: 5px;
     width: 0;
     height: 0;
     border-style: solid;
     vertical-align: middle;
+    margin-left: 5px;
 }
 
-/* Default state of the triangle */
+/* Default state of arrow */
 .sortable::after {
     border-width: 5px 5px 0 5px;
     border-color: transparent transparent transparent transparent;
 }
 
-/* Change the triangle direction based on the sorting order */
+/* Change the arrow direction based on the sorting order */
 .sortable.asc::after {
     border-width: 0 5px 5px 5px;
-    border-color: transparent transparent #0000FF transparent; /* Green color */
+    border-color: transparent transparent #0000FF transparent;
 }
 
 .sortable.desc::after {
     border-width: 5px 5px 0 5px;
-    border-color: #0000FF transparent transparent transparent; /* Green color */
+    border-color: #0000FF transparent transparent transparent; 
+}
+
+/* Separate arrow indicators for title */
+#title-th.sortable::after {
+    position: relative;
+    cursor: pointer;
+}
+
+#title-th.sortable.asc::after {
+    border-width: 5px 5px 0 5px;
+    border-color: #0000FF transparent transparent transparent; 
+}
+
+#title-th.sortable.desc::after {
+    border-width: 0 5px 5px 5px;
+    border-color: transparent transparent #0000FF transparent; 
+}
+
+/* Make table rows clickable */
+#search-results tbody tr:hover {
+    cursor: pointer;
+    background-color: #f5f5f5;
 }

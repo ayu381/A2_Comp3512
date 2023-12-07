@@ -107,7 +107,6 @@ function displaySongs(songsToDisplay) {
 
         tableBody.appendChild(row);
 
-
         row.addEventListener("click", (e) => {
             const row = e.target.parentNode;
             //extract the song_id
@@ -116,7 +115,6 @@ function displaySongs(songsToDisplay) {
         })
     });
 }
-
 
 function addToPlaylist(song) {
     // Implement the logic to add the song to the playlist
@@ -302,8 +300,8 @@ function toggleSortOrder(sortBy) {
 // Click event listeners for headers
 titleTh.addEventListener('click', function () {
     toggleSortOrder('title');
+    updateSortIndicator(titleTh, sortTitleOrder); 
     filterSongs();
-    updateSortIndicator(titleTh, sortTitleOrder);
 });
 
 artistTh.addEventListener('click', function () {
@@ -357,6 +355,9 @@ function clearFormAndTable() {
 
     // Call filterSongs to refresh the displayed data with the originalData
     filterSongs();
+
+     // Reset arrow position
+     updateSortIndicator(titleTh, sortTitleOrder);
 }
 
 // Function for indicator arrows
@@ -382,6 +383,6 @@ window.onload = function () {
     songDisplay();
     filterSongs();
 
-    sortTitleOrder = 'desc';
+    // Load arrow for title header
     updateSortIndicator(titleTh, sortTitleOrder);
 };
