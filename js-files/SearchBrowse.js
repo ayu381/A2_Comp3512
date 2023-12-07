@@ -2,7 +2,6 @@
 const artists = JSON.parse(artistContent);
 const genres = JSON.parse(genreContent);
 
-
 // Variables for event listeners
 var songSearch = document.getElementById('song-search');
 var artistSelect = document.getElementById('artist-select');
@@ -52,6 +51,8 @@ function songDisplay() {
 
         // Update originalData with the sorted data
         originalData = sortedLocalData;
+
+        console.log("Data is in localstorage");
     } else {
         fetch(api)
             .then(response => response.json())
@@ -154,7 +155,7 @@ function genreOptions() {
     genreSelect.addEventListener('change', filterSongs);
 }
 
-// Event Listeners
+// Event listeners for forms
 document.getElementById("artist-select").addEventListener('change', filterSongs);
 document.getElementById("genre-select").addEventListener('change', filterSongs);
 document.getElementById("search-button").addEventListener("click", filterSongs);
@@ -165,7 +166,7 @@ function filterSongs() {
     const selectedGenre = document.getElementById("genre-select").value;
     const typedTitle = document.getElementById("song-search").value.toLowerCase();
 
-    // Retrieve the data from local storage or API
+    // Retrieve data from local storage or API
     const storedData = localStorage.getItem('songData');
     const songs = storedData ? JSON.parse(storedData) : [];
 
@@ -183,6 +184,10 @@ function filterSongs() {
         sortedSongs = sortSongs(sortedSongs, 'year', 'desc');
     }
 
+    if (sortPopularityOrder === 'desc') {
+        sortedSongs = sortSongs(sortedSongs, 'popularity', 'desc');
+    } 
+
     const filteredSongs = sortedSongs.filter(song =>
         (!selectedArtist || song.artist.name === selectedArtist) &&
         (!selectedGenre || song.genre.name === selectedGenre) &&
@@ -192,7 +197,7 @@ function filterSongs() {
     displayFilteredSongs(filteredSongs);
 }
 
-// Click event listeners for headers
+// Retrieve header ids
 const titleTh = document.getElementById("title-th");
 const artistTh = document.getElementById("artist-th");
 const yearTh = document.getElementById("year-th");
@@ -206,7 +211,7 @@ let sortYearOrder = 'asc';
 let sortGenreOrder = 'asc';
 let sortPopularityOrder = 'asc';
 
-// Sorting functions for songs
+// Sorting function for songs
 function sortSongs(songsSorted, sortBy, sortOrder) {
     return songsSorted.sort((a, b) => {
         const valueA = getValue(a, sortBy);
@@ -219,6 +224,12 @@ function sortSongs(songsSorted, sortBy, sortOrder) {
                 return sortOrder === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
             }
             return sortOrder === 'asc' ? artistComparison : -artistComparison;
+        } else if (sortBy === 'year') {
+            // Use parseInt to convert years to numbers for numerical comparison
+            return sortOrder === 'asc' ? parseInt(valueA) - parseInt(valueB) : parseInt(valueB) - parseInt(valueA);
+        } else if (sortBy === 'popularity') {
+            // Use parseInt to convert popularity to numbers for numerical comparison
+            return sortOrder === 'asc' ? parseInt(valueA) - parseInt(valueB) : parseInt(valueB) - parseInt(valueA);
         }
 
         // Use localeCompare for string comparison
@@ -233,28 +244,53 @@ function getValue(song, sortBy) {
         return song.artist && song.artist.name ? song.artist.name.toUpperCase() : '';
     } else if (sortBy === 'genre') {
         return song.genre && song.genre.name ? song.genre.name.toUpperCase() : '';
+    } else if (sortBy === 'year') {
+        return song.year ? song.year.toString() : '';
+    } else if (sortBy === 'popularity') {
+        return song.details && song.details.popularity ? song.details.popularity.toString() : '';
     }
 
-    // Add additional cases for other sorting criteria if needed
+    // Start page with data
     return '';
 }
 
+
+// Function for toggling sorts
 function toggleSortOrder(sortBy) {
     if (sortBy === 'title') {
         sortTitleOrder = sortTitleOrder === 'asc' ? 'desc' : 'asc';
         sortArtistOrder = 'asc';
-        sortGenreOrder = 'asc'; // Reset genre order when sorting by title
+        sortYearOrder = 'asc'; // Reset year order when sorting by title
+        sortGenreOrder = 'asc';
+        sortPopularityOrder = 'asc';
     } else if (sortBy === 'artist') {
         sortArtistOrder = sortArtistOrder === 'asc' ? 'desc' : 'asc';
         sortTitleOrder = 'asc';
-        sortGenreOrder = 'asc'; // Reset genre order when sorting by artist
+        sortYearOrder = 'asc'; // Reset year order when sorting by artist
+        sortGenreOrder = 'asc';
+        sortPopularityOrder = 'asc';
+    } else if (sortBy === 'year') {
+        sortYearOrder = sortYearOrder === 'asc' ? 'desc' : 'asc';
+        sortTitleOrder = 'asc';
+        sortArtistOrder = 'asc'; // Reset artist order when sorting by year
+        sortGenreOrder = 'asc';
+        sortPopularityOrder = 'asc';
     } else if (sortBy === 'genre') {
         sortGenreOrder = sortGenreOrder === 'asc' ? 'desc' : 'asc';
         sortTitleOrder = 'asc';
         sortArtistOrder = 'asc'; // Reset artist order when sorting by genre
+        sortYearOrder = 'asc';
+        sortPopularityOrder = 'asc';
+    } else if (sortBy === 'popularity') {
+        sortPopularityOrder = sortPopularityOrder === 'asc' ? 'desc' : 'asc';
+        sortTitleOrder = 'asc';
+        sortArtistOrder = 'asc'; // Reset artist order when sorting by popularity
+        sortYearOrder = 'asc';
+        sortGenreOrder = 'asc';
     }
 }
 
+// Click event listeners for headers
 titleTh.addEventListener('click', function () {
     toggleSortOrder('title');
     filterSongs();
@@ -275,13 +311,10 @@ genreTh.addEventListener('click', function () {
     filterSongs(); 
 });
 
-/*
-
 popularityTh.addEventListener('click', function () {
-    toggleSortOrder(); 
+    toggleSortOrder('popularity'); 
     filterSongs(); 
 });
-*/
 
 // Event listening for clearing table data
 document.getElementById("clear-button").addEventListener("click", clearFormAndTable);
@@ -304,20 +337,20 @@ function clearFormAndTable() {
     // Reset the sorting order to original state
     sortTitleOrder = 'asc';
     sortArtistOrder = 'asc';
+    sortYearOrder = 'asc';
+    sortGenreOrder = 'asc';
+    sortPopularityOrder = 'asc';
 
     // Call filterSongs to refresh the displayed data with the originalData
     filterSongs();
 }
 
-// Call all functions when window is loaded
+// Call all needed functions when window is loaded
 window.onload = function () {
-    // Set the initial sorting order for title
-    sortTitleOrder = 'asc';  
     artistOptions();
     genreOptions();
 
     // Load the songs and sort them by title
     songDisplay();
-    
-    filterSongs();  // Apply sorting and filtering based on the initial state
+    filterSongs();
 };
