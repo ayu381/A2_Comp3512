@@ -82,22 +82,33 @@ select {
 /* Make table headers clickable */
 th.sortable {
     cursor: pointer;
-    user-select: none; /* Prevent text selection while clicking */
+    user-select: none; 
 }
 
-/* Add an indicator to the sorted column */
-.sortable.sorted-asc #title-th::before {
-    content: ' ▲'; /* Upward arrow */
+/* Add triangle for indicating sort order */
+.sortable::after {
+    content: '';
+    display: inline-block;
+    margin-left: 5px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    vertical-align: middle;
 }
 
-.sortable.sorted-desc #title-th::before {
-    content: ' ▼'; /* Downward arrow */
+/* Default state of the triangle */
+.sortable::after {
+    border-width: 5px 5px 0 5px;
+    border-color: transparent transparent transparent transparent;
 }
 
-/* Make table rows clickable */
-#search-results tbody tr:hover {
-    cursor: pointer;
-    background-color: #f5f5f5;
+/* Change the triangle direction based on the sorting order */
+.sortable.asc::after {
+    border-width: 0 5px 5px 5px;
+    border-color: transparent transparent #0000FF transparent; /* Green color */
 }
 
-
+.sortable.desc::after {
+    border-width: 5px 5px 0 5px;
+    border-color: #0000FF transparent transparent transparent; /* Green color */
+}

@@ -2,11 +2,12 @@
 const artists = JSON.parse(artistContent);
 const genres = JSON.parse(genreContent);
 
-// Variables for event listeners
+// Variables for forms
 var songSearch = document.getElementById('song-search');
 var artistSelect = document.getElementById('artist-select');
 var genreSelect = document.getElementById('genre-select');
 
+// Variables for radio buttons
 var titleOption = document.getElementById('title-option');
 var artistOption = document.getElementById('artist-option');
 var genreOption = document.getElementById('genre-option');
@@ -173,19 +174,19 @@ function filterSongs() {
     let sortedSongs = sortSongs(songs, 'title', sortTitleOrder);
 
     if (sortArtistOrder === 'desc') {
-        sortedSongs = sortSongs(sortedSongs, 'artist', 'desc');
+        sortedSongs = sortSongs(sortedSongs, 'artist', 'asc');
     }
 
     if (sortGenreOrder === 'desc') {
-        sortedSongs = sortSongs(sortedSongs, 'genre', 'desc');
+        sortedSongs = sortSongs(sortedSongs, 'genre', 'asc');
     }
 
     if (sortYearOrder === 'desc') {
-        sortedSongs = sortSongs(sortedSongs, 'year', 'desc');
+        sortedSongs = sortSongs(sortedSongs, 'year', 'asc');
     }
 
     if (sortPopularityOrder === 'desc') {
-        sortedSongs = sortSongs(sortedSongs, 'popularity', 'desc');
+        sortedSongs = sortSongs(sortedSongs, 'popularity', 'asc');
     } 
 
     const filteredSongs = sortedSongs.filter(song =>
@@ -254,7 +255,6 @@ function getValue(song, sortBy) {
     return '';
 }
 
-
 // Function for toggling sorts
 function toggleSortOrder(sortBy) {
     if (sortBy === 'title') {
@@ -294,26 +294,31 @@ function toggleSortOrder(sortBy) {
 titleTh.addEventListener('click', function () {
     toggleSortOrder('title');
     filterSongs();
+    updateSortIndicator(titleTh, sortTitleOrder);
 });
 
 artistTh.addEventListener('click', function () {
     toggleSortOrder('artist');
     filterSongs();
+    updateSortIndicator(artistTh, sortArtistOrder);
 });
 
 yearTh.addEventListener('click', function () {
     toggleSortOrder('year'); 
     filterSongs(); 
+    updateSortIndicator(yearTh, sortYearOrder);
 });
 
 genreTh.addEventListener('click', function () {
     toggleSortOrder('genre'); 
     filterSongs(); 
+    updateSortIndicator(genreTh, sortGenreOrder);
 });
 
 popularityTh.addEventListener('click', function () {
     toggleSortOrder('popularity'); 
     filterSongs(); 
+    updateSortIndicator(popularityTh, sortPopularityOrder);
 });
 
 // Event listening for clearing table data
@@ -345,12 +350,29 @@ function clearFormAndTable() {
     filterSongs();
 }
 
+// Function for indicator arrows
+function updateSortIndicator(header, sortOrder) {
+    // Remove existing sort classes
+    titleTh.classList.remove('asc', 'desc');
+    artistTh.classList.remove('asc', 'desc');
+    yearTh.classList.remove('asc', 'desc');
+    genreTh.classList.remove('asc', 'desc');
+    popularityTh.classList.remove('asc', 'desc');
+
+    // Add arrow to current sort class
+    header.classList.add(sortOrder);
+}
+
 // Call all needed functions when window is loaded
 window.onload = function () {
+    // Load select form options
     artistOptions();
     genreOptions();
 
     // Load the songs and sort them by title
     songDisplay();
     filterSongs();
+
+    sortTitleOrder = 'desc';
+    updateSortIndicator(titleTh, sortTitleOrder);
 };
