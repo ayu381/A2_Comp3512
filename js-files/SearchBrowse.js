@@ -106,8 +106,17 @@ function displaySongs(songsToDisplay) {
         row.appendChild(addToPlaylistCell);
 
         tableBody.appendChild(row);
+
+
+        row.addEventListener("click", (e) => {
+            const row = e.target.parentNode;
+            //extract the song_id
+            const id = row.dataset.song;
+            console.dir("song id=" + song.genre.id);
+        })
     });
 }
+
 
 function addToPlaylist(song) {
     // Implement the logic to add the song to the playlist
