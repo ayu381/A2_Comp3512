@@ -109,11 +109,14 @@ function displaySongs(songsToDisplay) {
 
 
         row.addEventListener("click", (e) => {
-            const row = e.target.parentNode;
             //extract the song_id
-            const id = row.dataset.song;
-            console.dir("song id=" + song.genre.id);
-        })
+            const id = song.song_id;
+            console.dir("song id=" + id);
+
+            	// get the song object from the id
+                const selectedSong = songsToDisplay.find( s=> s.song_id == id)
+                console.log(selectedSong);
+        })        
     });
 }
 
