@@ -190,7 +190,10 @@ function filterSongs() {
 
     let sortedSongs = sortSongs(songs, 'title', sortTitleOrder);
 
+    // Adjust the sorting for the artist based on the current order
     if (sortArtistOrder === 'desc') {
+        sortedSongs = sortSongs(sortedSongs, 'artist', 'desc');
+    } else {
         sortedSongs = sortSongs(sortedSongs, 'artist', 'asc');
     }
 
@@ -238,10 +241,11 @@ function sortSongs(songsSorted, sortBy, sortOrder) {
         if (sortBy === 'artist') {
             // For artist sorting, consider both artist and title
             const artistComparison = valueA.localeCompare(valueB);
-            if (artistComparison === 0) {
-                return sortOrder === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
+            if (sortOrder === 'asc') {
+                return artistComparison === 0 ? a.title.localeCompare(b.title) : artistComparison;
+            } else {
+                return artistComparison === 0 ? b.title.localeCompare(a.title) : -artistComparison;
             }
-            return sortOrder === 'asc' ? artistComparison : -artistComparison;
         } else if (sortBy === 'year') {
             // Use parseInt to convert years to numbers for numerical comparison
             return sortOrder === 'asc' ? parseInt(valueA) - parseInt(valueB) : parseInt(valueB) - parseInt(valueA);
@@ -259,7 +263,8 @@ function getValue(song, sortBy) {
     if (sortBy === 'title') {
         return song.title ? song.title.toUpperCase() : '';
     } else if (sortBy === 'artist') {
-        return song.artist && song.artist.name ? song.artist.name.toUpperCase() : '';
+        // Change to return the actual artist name (not uppercase)
+        return song.artist && song.artist.name ? song.artist.name : '';
     } else if (sortBy === 'genre') {
         return song.genre && song.genre.name ? song.genre.name.toUpperCase() : '';
     } else if (sortBy === 'year') {
@@ -396,3 +401,5 @@ window.onload = function () {
     // Load arrow for title header
     updateSortIndicator(titleTh, sortTitleOrder);
 };
+
+
