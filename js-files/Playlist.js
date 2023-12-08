@@ -2,7 +2,7 @@
 var playlistView = document.getElementById("playlist-view");
 
 // Set the display property to "none" to hide the element
-//playlistView.style.display = "none";
+playlistView.style.display = "none";
 
 // Define an array to store playlist data
 let playlistData = [];

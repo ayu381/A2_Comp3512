@@ -193,8 +193,6 @@ function filterSongs() {
     // Adjust the sorting for the artist based on the current order
     if (sortArtistOrder === 'desc') {
         sortedSongs = sortSongs(sortedSongs, 'artist', 'desc');
-    } else {
-        sortedSongs = sortSongs(sortedSongs, 'artist', 'asc');
     }
 
     if (sortGenreOrder === 'desc') {
@@ -282,31 +280,31 @@ function toggleSortOrder(sortBy) {
     if (sortBy === 'title') {
         sortTitleOrder = sortTitleOrder === 'asc' ? 'desc' : 'asc';
         sortArtistOrder = 'asc';
-        sortYearOrder = 'asc'; // Reset year order when sorting by title
+        sortYearOrder = 'asc';
         sortGenreOrder = 'asc';
         sortPopularityOrder = 'asc';
     } else if (sortBy === 'artist') {
         sortArtistOrder = sortArtistOrder === 'asc' ? 'desc' : 'asc';
         sortTitleOrder = 'asc';
-        sortYearOrder = 'asc'; // Reset year order when sorting by artist
+        sortYearOrder = 'asc'; 
         sortGenreOrder = 'asc';
         sortPopularityOrder = 'asc';
     } else if (sortBy === 'year') {
         sortYearOrder = sortYearOrder === 'asc' ? 'desc' : 'asc';
         sortTitleOrder = 'asc';
-        sortArtistOrder = 'asc'; // Reset artist order when sorting by year
+        sortArtistOrder = 'asc'; 
         sortGenreOrder = 'asc';
         sortPopularityOrder = 'asc';
     } else if (sortBy === 'genre') {
         sortGenreOrder = sortGenreOrder === 'asc' ? 'desc' : 'asc';
         sortTitleOrder = 'asc';
-        sortArtistOrder = 'asc'; // Reset artist order when sorting by genre
+        sortArtistOrder = 'asc'; 
         sortYearOrder = 'asc';
         sortPopularityOrder = 'asc';
     } else if (sortBy === 'popularity') {
         sortPopularityOrder = sortPopularityOrder === 'asc' ? 'desc' : 'asc';
         sortTitleOrder = 'asc';
-        sortArtistOrder = 'asc'; // Reset artist order when sorting by popularity
+        sortArtistOrder = 'asc'; 
         sortYearOrder = 'asc';
         sortGenreOrder = 'asc';
     }
@@ -371,8 +369,8 @@ function clearFormAndTable() {
     // Call filterSongs to refresh the displayed data with the originalData
     filterSongs();
 
-     // Reset arrow position
-     updateSortIndicator(titleTh, sortTitleOrder);
+    // Reset arrow position
+    updateSortIndicator(titleTh, sortTitleOrder);
 }
 
 // Function for indicator arrows
