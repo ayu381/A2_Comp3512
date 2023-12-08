@@ -2,19 +2,19 @@
 var playlistView = document.getElementById("playlist-view");
 
 // Set the display property to "none" to hide the element
-playlistView.style.display = "none";
+// playlistView.style.display = "none";
 
 // Define an array to store playlist data
 let playlistData = [];
 
 // Function to add a song to the playlist
 function addToPlaylist(song) {
-    // Check if the song is already in the playlist
+    // Check if song is already in the playlist
     const isDuplicate = playlistData.some((item) => item.song_id === song.song_id);
 
     // If loop for check for duplicate songs
     if (!isDuplicate) {
-        // Add the song to  playlist array
+        // Add the song to playlist array
         playlistData.push(song);
 
         updatePlaylistView();
