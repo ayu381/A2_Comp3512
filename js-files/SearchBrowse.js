@@ -105,25 +105,26 @@ function displaySongs(songsToDisplay) {
         addToPlaylistCell.appendChild(addToPlaylistButton);
         row.appendChild(addToPlaylistCell);
 
-        tableBody.appendChild(row);
-
-        row.addEventListener("click", (e) => {
-            //extract the song_id
-            const id = song.song_id;
-            console.dir("song id=" + id);
-
-            	// get the song object from the id
-                const selectedSong = songsToDisplay.find( s=> s.song_id == id)
-                console.log(selectedSong);
-
-                // display the song details
-                document.querySelector("#title").textContent = selectedSong.title;
-                document.querySelector("#energy").textContent = selectedSong.analytics.energy;
-                document.querySelector("#danceablitiy").textContent = selectedSong.analytics.danceability;
-                document.querySelector("#liveness").textContent = selectedSong.analytics.liveness;
-    
-        })        
+        tableBody.appendChild(row);   
+        
+        row.addEventListener("click", () => rowClicked(song, songsToDisplay));
     });
+}
+
+function rowClicked(song, songsToDisplay) {
+        //extract the song_id
+        const id = song.song_id;
+        console.dir("song id=" + id);
+
+            // get the song object from the id
+            const selectedSong = songsToDisplay.find(s => s.song_id == id);
+            console.log(selectedSong);
+
+            // display the song details
+            document.querySelector("#title").textContent = selectedSong.title;
+            document.querySelector("#energy").textContent = selectedSong.analytics.energy;
+            document.querySelector("#danceablitiy").textContent = selectedSong.analytics.danceability;
+            document.querySelector("#liveness").textContent = selectedSong.analytics.liveness;
 }
 
 function addToPlaylist(song) {
