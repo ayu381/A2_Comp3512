@@ -107,7 +107,9 @@ function displaySongs(songsToDisplay) {
 
         tableBody.appendChild(row);   
         
+        // click event for each row
         row.addEventListener("click", () => rowClicked(song, songsToDisplay));
+        
     });
 }
 

@@ -79,21 +79,28 @@
     </div>
 
     <!-- SINGLE SONG VIEW SECTION -->
-    <div id="single-song-view">
-        <h2>Song Details</h2>
-        <div id="song-details" class="songDetails">
-            <table>
-                <thead>
-                    <tr>
-                        <th id = "title">Title</th>
-                        <th id = "energy">Energy</th>
-                        <th id = "danceablitiy">Danceablitiy</th>
-                        <th id = "liveness">Liveness</th>
-                    </tr>
-                </thead>
-            </table>
+<div id="single-song-view">
+    <h2>Song Details</h2>
+    <div id="song-details" class="songDetails">
+        <div id="left-section" class="song-info">
+            <h3>Song Information</h3>
+            <p id="song-info-line"><!--SongInfo on this line--></p>
+            <ul id="analysis-data">
+                <li id="bpm">BPM: </li>
+                <li id="energy">Energy: </li>
+                <li id="danceability">Danceability: </li>
+                <li id="liveness">Liveness: </li>
+                <li id="valence">Valence: </li>
+                <li id="acousticness">Acousticness: </li>
+                <li id="speechiness">Speechiness: </li>
+                <li id="popularity">Popularity: </li>
+            </ul>
+        </div>
+        <div id="right-section" class="radar-chart">
+            <!-- Include your radar chart here -->
         </div>
     </div>
+</div>
 
     <!-- PLAYLIST VIEW SECTION -->
     <div id="playlist-view">
