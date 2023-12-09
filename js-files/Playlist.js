@@ -73,6 +73,9 @@ function updatePlaylistView() {
 
         // Append the row to the playlist table body
         playlistTableBody.appendChild(row);
+
+        // click event for each row
+        row.addEventListener("click", () => rowClicked(song, playlistData));
     });
 
     // Update playlist count and average info

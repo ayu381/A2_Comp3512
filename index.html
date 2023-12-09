@@ -78,7 +78,7 @@
         </table>
     </div>
 
-    <!-- SINGLE SONG VIEW SECTION -->
+    <!-- Single Song View Section -->
 <div id="single-song-view">
     <h2>Song Details</h2>
     <div id="song-details" class="songDetails">
@@ -96,8 +96,13 @@
                 <li id="popularity">Popularity: </li>
             </ul>
         </div>
+
+         <!-- Radar Chart Section -->
         <div id="right-section" class="radar-chart">
-            <!-- Include your radar chart here -->
+           
+            <h3>Radar Chart</h3>
+            <canvas id="radarChart"></canvas>
+
         </div>
     </div>
 </div>
@@ -129,13 +134,16 @@
         <!-- Footer content here -->
     </footer>
 
-    <!-- script sources-->
+    <!-- Script Sources-->
     <script src="starting-files/artists.json"></script>
     <script src="starting-files/genres.json"></script>
     <script src="starting-files/sample-songs.json"></script>
     <script src="js-files/SearchBrowse.js"></script>
     <script src="js-files/SongDetails.js"></script> 
     <script src="js-files/Playlist.js"></script>
+
+     <!-- Radar Chart-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
 
