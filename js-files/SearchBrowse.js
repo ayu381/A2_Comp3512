@@ -1,3 +1,5 @@
+const api = 'https://www.randyconnolly.com/funwebdev/3rd/api/music/songs-nested.php';
+
 // JSON parsing for each file given
 const artists = JSON.parse(artistContent);
 const genres = JSON.parse(genreContent);
