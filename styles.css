@@ -178,5 +178,21 @@ th.sortable {
     border-color: transparent transparent #0000FF transparent; 
 }
 
+/*Radar Chart Styling*/
+#song-details {
+    display: flex;
+}
+
+#left-section {
+    width: 50%;
+    padding: 50px;
+}
+
+#right-section {
+    width: 50%;
+    padding: 50px; 
+}
+
+
 
 
