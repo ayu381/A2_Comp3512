@@ -1,8 +1,39 @@
-// Get the element by its id
-var playlistView = document.getElementById("playlist-view");
+// Get the playlist button element by its id
+var playlistButton = document.getElementById("playlist-button");
 
-// Set the display property to "none" to hide the element
-// playlistView.style.display = "none";
+// Get the search/browse section element by its id
+var searchSongsView = document.getElementById("search-songs-view");
+
+// Get the single-song view element by its id
+var singleSongView = document.getElementById("single-song-view");
+
+// Add an event listener to the playlist button
+playlistButton.addEventListener("click", function () {
+    // Show the playlist view
+    searchSongsView.style.display = "none";
+    singleSongView.style.display = "none";
+    playlistView.style.display = "block";
+});
+
+// Get the remove all button element by its id
+var removeAllButton = document.getElementById("remove-all-button");
+
+// Add an event listener to the remove all button
+removeAllButton.addEventListener("click", function () {
+    // Call the function to remove all songs from the playlist
+    removeAllFromPlaylist();
+});
+
+// Function to remove all songs from the playlist
+function removeAllFromPlaylist() {
+    // Clear the playlistData array
+    playlistData = [];
+
+    // Update the playlist view to reflect the changes
+    updatePlaylistView();
+
+    console.log("All songs removed from the playlist.");
+}
 
 // Define an array to store playlist data
 let playlistData = [];
@@ -73,7 +104,3 @@ function createCell(value) {
     cell.textContent = value;
     return cell;
 }
-
-
-
-
