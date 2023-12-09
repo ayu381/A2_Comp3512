@@ -340,7 +340,7 @@ popularityTh.addEventListener('click', function () {
 document.getElementById("clear-button").addEventListener("click", clearFormAndTable);
 
 function clearFormAndTable() {
-    // Clear the text input
+    // Clear text input in search form
     songSearch.value = '';
 
     // Reset radio buttons to default
@@ -354,7 +354,7 @@ function clearFormAndTable() {
     artistSelect.selectedIndex = 0;
     genreSelect.selectedIndex = 0;
 
-    // Reset the sorting order to original state
+    // Reset table sort
     sortTitleOrder = 'asc';
     sortArtistOrder = 'asc';
     sortYearOrder = 'asc';

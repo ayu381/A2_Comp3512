@@ -4,18 +4,23 @@ var playlistButton = document.getElementById("playlist-button");
 // Get the search/browse section element by its id
 var searchSongsView = document.getElementById("search-songs-view");
 
-// Get the single-song view element by its id
-var singleSongView = document.getElementById("single-song-view");
-
 // Get the playlist view element by its id
 var playlistView = document.getElementById("playlist-view");
 
 // Add an event listener to the playlist button
 playlistButton.addEventListener("click", function () {
-    // Show the playlist view
-    searchSongsView.style.display = "none";
-    singleSongView.style.display = "none";
-    playlistView.style.display = "block";
+    // Toggle visibility of searchSongsView and playlistView
+    if (searchSongsView.style.display !== "none") {
+        searchSongsView.style.display = "none";
+        playlistView.style.display = "block";
+        // Change button text to "Close View"
+        playlistButton.textContent = "Close Playlist";
+    } else {
+        searchSongsView.style.display = "block";
+        playlistView.style.display = "none";
+        // Change button text to "Playlist"
+        playlistButton.textContent = "Playlist";
+    }
 });
 
 var removeAllButton = document.getElementById("remove-all-button");
