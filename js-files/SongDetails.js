@@ -1,17 +1,43 @@
-// Get the element by its id
+// Get single song element id
 var singleSongView = document.getElementById("single-song-view");
 
-// Set the display property to "none" to hide the element initially
+// Hide view using id
 singleSongView.style.display = "none";
 
-// DOM for playlist button
-document.getElementById("playlist-button").addEventListener("click", closeSingleSongView);
+// Event listening for hiding playlist button
+var playlistButton = document.getElementById("playlist-button");
+playlistButton.addEventListener("click", closeSingleSongView);
 
-// Dom for close view button
-document.getElementById("close-view-button").addEventListener("click", closeSingleSongView);
+// Function to create the "Close View" button
+function createCloseViewButton() {
+    var closeViewButton = document.createElement("button");
+    closeViewButton.id = "close-view-button";
+    closeViewButton.textContent = "Close View";
 
+    // Event listener for the "Close View" button
+    closeViewButton.addEventListener("click", function () {
+        // Hide the single-song-view
+        singleSongView.style.display = "none";
+
+        // Show search-songs-view
+        document.getElementById("search-songs-view").style.display = "block";
+
+        // Remove "Close View" button from header
+        var closeButtonContainer = document.getElementById("close-view-button-container");
+        closeButtonContainer.innerHTML = "";
+
+        // Show "Playlist" button in the header
+        playlistButton.style.display = "block";
+    });
+
+    // Append "Close View" button to the header
+    var closeButtonContainer = document.getElementById("close-view-button-container");
+    closeButtonContainer.appendChild(closeViewButton);
+}
+
+// Function for when song row is clicked
 function rowClicked(song, songsToDisplay) {
-    // Extract the song_id
+    // Extract song_id
     const id = song.song_id;
     console.dir("song id=" + id);
 
@@ -25,11 +51,13 @@ function rowClicked(song, songsToDisplay) {
 
     // Hide only the search-songs-view and show the single-song-view
     document.getElementById("search-songs-view").style.display = "none";
-    document.getElementById("single-song-view").style.display = "block";
+    singleSongView.style.display = "block";
 
-    // Hide the "Playlist" button and show the "Close View" button in the header
-    document.getElementById("playlist-button").style.display = "none";
-    document.getElementById("close-view-button").style.display = "block";
+    // Show the "Close View" button dynamically in the header
+    createCloseViewButton();
+
+    // Hide the "Playlist" button in the header
+    playlistButton.style.display = "none";
 }
 
 function updateSongInfo(selectedSong) {
@@ -102,5 +130,5 @@ function radarChart(analytics) {
     });
 }
 
-
-
+// Additional logic to hide the close view button initially
+closeViewButton.style.display = "none";
