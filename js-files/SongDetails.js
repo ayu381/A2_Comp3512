@@ -20,7 +20,16 @@ function rowClicked(song, songsToDisplay) {
     function updateSongInfo(selectedSong) {
     // Display the song details
     const songInfoLine = document.querySelector("#song-info-line");
-    songInfoLine.textContent =`${selectedSong.title}, ${selectedSong.artist.name}, ${selectedSong.genre.name}, ${selectedSong.year}, ${selectedSong.details.duration}`;
+
+    const songTimeConvert = selectedSong.details.duration;
+
+    const durationMin = Math.floor(songTimeConvert / 60);
+    const durationSec = songTimeConvert % 60;
+    const displayTime = durationMin + ':' + durationSec.toString().padStart(2, '0');
+
+
+    // Text Content in the SongInfo line
+    songInfoLine.textContent =`${selectedSong.title}, ${selectedSong.artist.name}, ${selectedSong.genre.name}, ${selectedSong.year}, ${displayTime}`;
 
         // Display analysis data
         document.querySelector("#bpm").textContent = "BPM: " + selectedSong.details.bpm;

@@ -181,7 +181,7 @@ function filterSongs() {
 
     // Adjust the sorting for the artist based on the current order
     if (sortArtistOrder === 'desc') {
-        sortedSongs = sortSongs(sortedSongs, 'artist', 'desc');
+        sortedSongs = sortSongs(sortedSongs, 'artist', 'asc');
     }
 
     if (sortGenreOrder === 'desc') {
@@ -236,11 +236,17 @@ function sortSongs(songsSorted, sortBy, sortOrder) {
         } else if (sortBy === 'year') {
             // Use parseInt to convert years to numbers for numerical comparison
             return sortOrder === 'asc' ? parseInt(valueA) - parseInt(valueB) : parseInt(valueB) - parseInt(valueA);
-        } else if (sortBy === 'popularity') {
-            // Use parseInt to convert popularity to numbers for numerical comparison
+        } else if (sortBy === 'genre') {
+            // For genre sorting, consider both genre and title
+            const genreComparison = valueA.localeCompare(valueB);
+            if (sortOrder === 'asc') {
+                return genreComparison === 0 ? a.title.localeCompare(b.title) : genreComparison;
+            } else {
+                return genreComparison === 0 ? b.title.localeCompare(a.title) : -genreComparison;
+            }
+        } else if (sortBy === 'popularity'){
             return sortOrder === 'asc' ? parseInt(valueA) - parseInt(valueB) : parseInt(valueB) - parseInt(valueA);
         }
-
         // Use localeCompare for string comparison
         return sortOrder === 'asc' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
     });
