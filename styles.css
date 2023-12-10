@@ -123,6 +123,22 @@ th.sortable {
     border-color: #0000FF transparent transparent transparent; 
 }
 
+/* Separate arrow indicators for title */
+#title-th.sortable::after {
+    position: relative;
+    cursor: pointer;
+}
+
+#title-th.sortable.asc::after {
+    border-width: 5px 5px 0 5px;
+    border-color: #0000FF transparent transparent transparent; 
+}
+
+#title-th.sortable.desc::after {
+    border-width: 0 5px 5px 5px;
+    border-color: transparent transparent #0000FF transparent; 
+}
+
 /* Rounded buttons */
 button {
     border: none;
