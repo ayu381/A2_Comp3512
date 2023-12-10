@@ -8,7 +8,7 @@ singleSongView.style.display = "none";
 
 // Event listening for hiding playlist button
 var playlistButton = document.getElementById("playlist-button");
-playlistButton.addEventListener("click", closeSingleSongView);
+playlistButton.addEventListener("click", singleSongView);
 
 // Function to create the "Close View" button
 function createCloseViewButton() {
@@ -103,7 +103,7 @@ function radarChart(analytics) {
         datasets: [{
             label: 'Song Analytics',
             backgroundColor: 'gray',
-            borderColor: '#02fa0a',
+            borderColor: 'blue',
             data: [
                 analytics.bpm,
                 analytics.energy,
