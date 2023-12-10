@@ -5,39 +5,32 @@ const artists = JSON.parse(artistContent);
 const genres = JSON.parse(genreContent);
 
 // Variables for forms
-var songSearch = document.getElementById('song-search');
-var artistSelect = document.getElementById('artist-select');
-var genreSelect = document.getElementById('genre-select');
+const songSearch = document.getElementById('song-search');
+const artistSelect = document.getElementById('artist-select');
+const genreSelect = document.getElementById('genre-select');
 
 // Variables for radio buttons
-var titleOption = document.getElementById('title-option');
-var artistOption = document.getElementById('artist-option');
-var genreOption = document.getElementById('genre-option');
+const titleOption = document.getElementById('title-option');
+const artistOption = document.getElementById('artist-option');
+const genreOption = document.getElementById('genre-option');
 
 // Initially disable artist and genre select forms before using their respective radio buttons
 artistSelect.disabled = true;
 genreSelect.disabled = true;
 
 // Event listeners for radio buttons
-titleOption.addEventListener('change', function () {
-    songSearch.disabled = false;
-    artistSelect.disabled = true;
-    genreSelect.disabled = true;
-});
+titleOption.addEventListener('change', () => handleRadioChange(songSearch, artistSelect, genreSelect));
+artistOption.addEventListener('change', () => handleRadioChange(artistSelect, songSearch, genreSelect));
+genreOption.addEventListener('change', () => handleRadioChange(genreSelect, songSearch, artistSelect));
 
-artistOption.addEventListener('change', function () {
-    songSearch.disabled = true;
-    artistSelect.disabled = false;
-    genreSelect.disabled = true;
-});
+// Set which radio buttons are active
+function handleRadioChange(selected, disabled1, disabled2) {
+    selected.disabled = false;
+    disabled1.disabled = true;
+    disabled2.disabled = true;
+}
 
-genreOption.addEventListener('change', function () {
-    songSearch.disabled = true;
-    artistSelect.disabled = true;
-    genreSelect.disabled = false;
-});
-
-/// Define originalData as an empty array initially
+// Define originalData as an empty array initially
 let originalData = [];
 
 // Function to populate rows with song data
@@ -54,7 +47,6 @@ function songDisplay() {
 
         // Update originalData with the sorted data
         originalData = sortedLocalData;
-
         console.log("Data is in localstorage");
     } else {
         fetch(api)
@@ -84,7 +76,7 @@ function displaySongs(songsToDisplay) {
     const tableBody = document.querySelector("#search-results tbody");
 
     // Clear existing rows
-    tableBody.innerHTML = '';
+    tableBody.textContent = '';
 
     // Iterate through each song and create a new row in the table
     songsToDisplay.forEach((song) => {
@@ -115,17 +107,16 @@ function displaySongs(songsToDisplay) {
     });
 }
 
-function addToPlaylist(song) {
-    // Implement the logic to add the song to the playlist
-    // For example, you can store the selected songs in an array or perform any other desired action
-    console.log("Adding to playlist:", song.title);
-}
-
 // Function to create cell for each row - then appended above
 function createCell(value) {
     const cell = document.createElement("td");
     cell.textContent = value;
     return cell;
+}
+
+// Add to playlist function
+function addToPlaylist(song) {
+    console.log("Adding to playlist:", song.title);
 }
 
 // Artist select options function
@@ -394,5 +385,3 @@ window.onload = function () {
     // Load arrow for title header
     updateSortIndicator(titleTh, sortTitleOrder);
 };
-
-

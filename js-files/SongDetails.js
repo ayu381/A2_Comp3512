@@ -1,6 +1,8 @@
 // Get single song element id
 var singleSongView = document.getElementById("single-song-view");
 
+const closeViewButton = document.createElement("button");
+
 // Hide view using id
 singleSongView.style.display = "none";
 
@@ -10,7 +12,7 @@ playlistButton.addEventListener("click", closeSingleSongView);
 
 // Function to create the "Close View" button
 function createCloseViewButton() {
-    var closeViewButton = document.createElement("button");
+    
     closeViewButton.id = "close-view-button";
     closeViewButton.textContent = "Close View";
 
