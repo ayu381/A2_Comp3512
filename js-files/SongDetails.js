@@ -1,5 +1,5 @@
 // Get single song element id
-var singleSongView = document.getElementById("single-song-view");
+const singleSongView = document.querySelector("#single-song-view");
 
 const closeViewButton = document.createElement("button");
 
