@@ -1,6 +1,5 @@
 
 // Selecting Views
-var playlistButton = document.querySelector("#playlist-button");
 const removeAllButton = document.querySelector("#remove-all-button");
 const searchSongsView = document.querySelector("#search-songs-view");
 const playlistView = document.querySelector("#playlist-view");

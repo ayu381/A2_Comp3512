@@ -7,8 +7,33 @@ const closeViewButton = document.createElement("button");
 singleSongView.style.display = "none";
 
 // Event listening for hiding playlist button
-var playlistButton = document.getElementById("playlist-button");
+const playlistButton = document.querySelector("#playlist-button");
+const creditsButton = document.querySelector("#credits-button");
+
 playlistButton.addEventListener("click", singleSongView);
+creditsButton.addEventListener("mouseover", showCredits);
+
+function showCredits() {
+    const creditsPanel = document.createElement("div");
+    creditsPanel.className = "credits-panel";
+
+    // Add content to the pop-up panel
+    creditsPanel.innerText = `
+    Group Members:
+    • Zee El-Masri
+    • Andrew Yu
+
+    GitHub Repository:
+    • Assignment Repo (https://github.com/ayu381/A2_Comp3512)`;
+
+    // Append the pop-up panel to the credits button
+    creditsButton.appendChild(creditsPanel);
+
+    setTimeout(() => {
+        creditsButton.removeChild(creditsPanel);
+    }, 5000);
+}
+
 
 // Function to create the "Close View" button
 function createCloseViewButton() {
