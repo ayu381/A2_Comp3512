@@ -132,5 +132,4 @@ function radarChart(analytics) {
     });
 }
 
-// Additional logic to hide the close view button initially
-closeViewButton.style.display = "none";
+

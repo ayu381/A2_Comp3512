@@ -71,7 +71,7 @@ function displayFilteredSongs(filteredSongs) {
     displaySongs(filteredSongs);
 }
 
-// create rows and append cells
+// Create rows and append cells
 function displaySongs(songsToDisplay) {
     const tableBody = document.querySelector("#search-results tbody");
 
@@ -83,7 +83,7 @@ function displaySongs(songsToDisplay) {
         const row = document.createElement("tr");
 
         // Append cells
-       appendCreateCells(row, song);
+        appendCreateCells(row, song);
 
         // Add button cell
         const addToPlaylistCell = document.createElement("td");
@@ -95,11 +95,12 @@ function displaySongs(songsToDisplay) {
         addToPlaylistCell.appendChild(addToPlaylistButton);
         row.appendChild(addToPlaylistCell);
 
-        tableBody.appendChild(row);   
-        
-        // click event for each row
-        row.addEventListener("click", () => rowClicked(song, songsToDisplay));
-        
+        // Add click event for each cell in the row (excluding the "Add" button cell)
+        row.querySelectorAll("td:not(:last-child)").forEach((cell) => {
+            cell.addEventListener("click", () => rowClicked(song, songsToDisplay));
+        });
+
+        tableBody.appendChild(row);
     });
 }
 
