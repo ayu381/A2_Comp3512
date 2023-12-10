@@ -54,8 +54,20 @@ h1 {
     margin-right: 10px; 
     border-radius: 5px;
 }
-/* CSS for song search table */
 
+#song-search, 
+#artist-select, 
+#genre-select {
+    padding: 5px;
+    margin: 10px;
+}
+
+#radioButtons {
+    margin-bottom: 20px;
+    margin-top: -10px;
+}
+
+/* CSS for song search table */
 #search-results {
     margin-top: 20px;
 }
