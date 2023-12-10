@@ -45,10 +45,25 @@ function addToPlaylist(song) {
     if (!isDuplicate) {
         playlistData.push(song);
         updatePlaylistView();
-        console.log(`Song "${song.title}" by ${song.artist.name} added to the playlist.`);
+        displayPopUp(`Song "${song.title}" by ${song.artist.name} added to the playlist.`);
     } else {
-        console.log(`Song "${song.title}" by ${song.artist.name} is already in the playlist.`);
+        displayPopUp(`Song "${song.title}" by ${song.artist.name} is already in the playlist.`);
     }
+}
+
+//Display a pop-up notification
+function displayPopUp(msg) {
+    const notificationPanel = document.createElement("div");
+    notificationPanel.className = "notification";
+    notificationPanel.textContent = msg;
+
+    // Append the notification panel to the body
+    document.body.appendChild(notificationPanel);
+
+    // Sets duration for notification 3 secnods
+    setTimeout(() => {
+        document.body.removeChild(notificationPanel);
+    }, 3000);
 }
 
 // Update the displayed playlist and summary
