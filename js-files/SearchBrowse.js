@@ -83,11 +83,7 @@ function displaySongs(songsToDisplay) {
         const row = document.createElement("tr");
 
         // Append cells
-        row.appendChild(createCell(song.title));
-        row.appendChild(createCell(song.artist.name));
-        row.appendChild(createCell(song.year));
-        row.appendChild(createCell(song.genre.name));
-        row.appendChild(createCell(song.details.popularity));
+       appendCreateCells(row, song);
 
         // Add button cell
         const addToPlaylistCell = document.createElement("td");
@@ -105,6 +101,14 @@ function displaySongs(songsToDisplay) {
         row.addEventListener("click", () => rowClicked(song, songsToDisplay));
         
     });
+}
+
+function appendCreateCells(row, song) {
+    row.appendChild(createCell(song.title));
+    row.appendChild(createCell(song.artist.name));
+    row.appendChild(createCell(song.year));
+    row.appendChild(createCell(song.genre.name));
+    row.appendChild(createCell(song.details.popularity));
 }
 
 // Function to create cell for each row - then appended above
