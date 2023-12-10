@@ -1,4 +1,3 @@
-
 // Selecting Views
 const removeAllButton = document.querySelector("#remove-all-button");
 const searchSongsView = document.querySelector("#search-songs-view");
@@ -87,7 +86,15 @@ function appendRemoveButton(row, songId) {
     const removeButtonCell = document.createElement("td");
     const removeButton = document.createElement("button");
     removeButton.textContent = "Remove";
-    removeButton.addEventListener("click", () => removeFromPlaylist(songId));
+
+    // Add a click event listener to the remove button
+    removeButton.addEventListener("click", (event) => {
+        // Prevent the click event from propagating to the row click event
+        event.stopPropagation();
+        // Call the removeFromPlaylist function
+        removeFromPlaylist(songId);
+    });
+
     removeButtonCell.appendChild(removeButton);
     row.appendChild(removeButtonCell);
 }
