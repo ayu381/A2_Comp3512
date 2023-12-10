@@ -47,18 +47,18 @@ function createCloseViewButton() {
         singleSongView.style.display = "none";
 
         // Show search-songs-view
-        document.getElementById("search-songs-view").style.display = "block";
+        document.querySelector("#search-songs-view").style.display = "block";
 
         // Remove "Close View" button from header
-        var closeButtonContainer = document.getElementById("close-view-button-container");
-        closeButtonContainer.innerHTML = "";
+        const closeButtonContainer = document.querySelector("#close-view-button-container");
+        closeButtonContainer.textContent = "";
 
         // Show "Playlist" button in the header
         playlistButton.style.display = "block";
     });
 
     // Append "Close View" button to the header
-    var closeButtonContainer = document.getElementById("close-view-button-container");
+    const closeButtonContainer = document.querySelector("#close-view-button-container");
     closeButtonContainer.appendChild(closeViewButton);
 }
 
@@ -80,7 +80,7 @@ function rowClicked(song, songsToDisplay) {
     radarChart(selectedSong.analytics);
 
     // Hide only the search-songs-view and show the single-song-view
-    document.getElementById("search-songs-view").style.display = "none";
+    document.querySelector("#search-songs-view").style.display = "none";
     singleSongView.style.display = "block";
 
     // Show the "Close View" button dynamically in the header
@@ -122,7 +122,7 @@ function updateSongInfo(selectedSong) {
 }
 
 function radarChart(analytics) {
-    const ctx = document.getElementById('radarChart').getContext('2d');
+    const ctx = document.querySelector('#radarChart').getContext('2d');
 
     // Check if chart exists
     const existingChart = Chart.getChart(ctx);

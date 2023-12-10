@@ -67,7 +67,7 @@ function displayPopUp(msg) {
 // Update the displayed playlist and summary
 function updatePlaylistView() {
     const playlistTableBody = document.querySelector("#playlist-view tbody");
-    playlistTableBody.innerHTML = '';
+    playlistTableBody.textContent = '';
 
     // Iterate through each song and create a new row in the table
     playlistData.forEach((song) => {
@@ -101,8 +101,8 @@ function appendRemoveButton(row, songId) {
 
 // Update playlist count and average info
 function updatePlaylistSummary() {
-    const playlistCount = document.getElementById("playlist-count");
-    const playlistAverage = document.getElementById("playlist-average");
+    const playlistCount = document.querySelector("#playlist-count");
+    const playlistAverage = document.querySelector("#playlist-average");
 
     // Calculate count and average
     const count = playlistData.length;
