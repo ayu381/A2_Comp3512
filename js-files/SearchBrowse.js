@@ -5,14 +5,14 @@ const artists = JSON.parse(artistContent);
 const genres = JSON.parse(genreContent);
 
 // Variables for forms
-const songSearch = document.getElementById('song-search');
-const artistSelect = document.getElementById('artist-select');
-const genreSelect = document.getElementById('genre-select');
+const songSearch = document.querySelector('#song-search');
+const artistSelect = document.querySelector('#artist-select');
+const genreSelect = document.querySelector('#genre-select');
 
 // Variables for radio buttons
-const titleOption = document.getElementById('title-option');
-const artistOption = document.getElementById('artist-option');
-const genreOption = document.getElementById('genre-option');
+const titleOption = document.querySelector('#title-option');
+const artistOption = document.querySelector('#artist-option');
+const genreOption = document.querySelector('#genre-option');
 
 // Initially disable artist and genre select forms before using their respective radio buttons
 artistSelect.disabled = true;
@@ -122,7 +122,7 @@ function createCell(value) {
 
 // Artist select options function
 function artistOptions() {
-    const artistSelect = document.getElementById("artist-select");
+    const artistSelect = document.querySelector("#artist-select");
 
     // Create an option for each artist and add it to the select element
     artists.forEach((artist) => {
@@ -140,7 +140,7 @@ function artistOptions() {
 
 // Genre select options function
 function genreOptions() {
-    const genreSelect = document.getElementById("genre-select");
+    const genreSelect = document.querySelector("#genre-select");
 
     // Create an option for each genre and add it to the select element
     genres.forEach((genre) => {
@@ -155,15 +155,15 @@ function genreOptions() {
 }
 
 // Event listeners for forms
-document.getElementById("artist-select").addEventListener('change', filterSongs);
-document.getElementById("genre-select").addEventListener('change', filterSongs);
-document.getElementById("search-button").addEventListener("click", filterSongs);
+document.querySelector("#artist-select").addEventListener('change', filterSongs);
+document.querySelector("#genre-select").addEventListener('change', filterSongs);
+document.querySelector("#search-button").addEventListener("click", filterSongs);
 
 // Function to filter songs based on selected artist, genre, and title
 function filterSongs() {
-    const selectedArtist = document.getElementById("artist-select").value;
-    const selectedGenre = document.getElementById("genre-select").value;
-    const typedTitle = document.getElementById("song-search").value.toLowerCase();
+    const selectedArtist = document.querySelector("#artist-select").value;
+    const selectedGenre = document.querySelector("#genre-select").value;
+    const typedTitle = document.querySelector("#song-search").value.toLowerCase();
 
     // Retrieve data from local storage or API
     const storedData = localStorage.getItem('songData');
@@ -198,11 +198,11 @@ function filterSongs() {
 }
 
 // Retrieve header ids
-const titleTh = document.getElementById("title-th");
-const artistTh = document.getElementById("artist-th");
-const yearTh = document.getElementById("year-th");
-const genreTh = document.getElementById("genre-th");
-const popularityTh = document.getElementById("popularity-th");
+const titleTh = document.querySelector("#title-th");
+const artistTh = document.querySelector("#artist-th");
+const yearTh = document.querySelector("#year-th");
+const genreTh = document.querySelector("#genre-th");
+const popularityTh = document.querySelector("#popularity-th");
 
 // Global variables for ordering
 let sortTitleOrder = 'asc';
@@ -329,7 +329,7 @@ popularityTh.addEventListener('click', function () {
 });
 
 // Event listening for clearing table data
-document.getElementById("clear-button").addEventListener("click", clearFormAndTable);
+document.querySelector("#clear-button").addEventListener("click", clearFormAndTable);
 
 function clearFormAndTable() {
     // Clear text input in search form
