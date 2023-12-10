@@ -186,6 +186,25 @@ th.sortable {
     border-color: transparent transparent white transparent;
 }
 
+/* Replace bullet points with green arrows*/
+#analysis-data {
+    list-style: none;
+    padding: 0;
+}
+
+
+#analysis-data li::before {
+    content: "\2192"; 
+    color: #02fa0a; 
+    display: inline-block;
+    width: 1em; 
+    margin-right: 0.5em; 
+}
+
+#analysis-data li {
+    margin-bottom: 0.5em; 
+}
+
 /* rounded buttons */
 button {
     border: none;
