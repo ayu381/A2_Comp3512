@@ -1,4 +1,4 @@
-// Selecting Views
+// Consts for views and buttons
 const removeAllButton = document.querySelector("#remove-all-button");
 const searchSongsView = document.querySelector("#search-songs-view");
 const playlistView = document.querySelector("#playlist-view");
@@ -6,7 +6,7 @@ const playlistView = document.querySelector("#playlist-view");
 //Make playlist view hidden initially
 playlistView.style.display = "none";
 
-// Event listeners
+// Event listeners for Playlist and Remove All buttons
 playlistButton.addEventListener("click", toggleViews);
 removeAllButton.addEventListener("click", removeAllFromPlaylist);
 
@@ -22,21 +22,21 @@ function toggleViews() {
     }
 }
 
-// Show the Playlist View and update button text
+// Show Playlist View and update button text
 function showPlaylistView() {
     searchSongsView.style.display = "none";
     playlistView.style.display = "block";
     playlistButton.textContent = "Close Playlist";
 }
 
-// Show the Search Songs View and update button text
+// Show Search Songs View and update button text
 function showSearchSongsView() {
     searchSongsView.style.display = "block";
     playlistView.style.display = "none";
     playlistButton.textContent = "Playlist";
 }
 
-// Add a song to the playlist
+// Add a song to playlist
 function addToPlaylist(song) {
     const isDuplicate = playlistData.some((item) => item.song_id === song.song_id);
     
@@ -64,7 +64,7 @@ function displayPopUp(msg) {
     }, 3000);
 }
 
-// Update the displayed playlist and summary
+// Update displayed playlist and summary
 function updatePlaylistView() {
     const playlistTableBody = document.querySelector("#playlist-view tbody");
     playlistTableBody.textContent = '';
@@ -87,11 +87,11 @@ function appendRemoveButton(row, songId) {
     const removeButton = document.createElement("button");
     removeButton.textContent = "Remove";
 
-    // Add a click event listener to the remove button
+    // Add a click event listener to remove button
     removeButton.addEventListener("click", (event) => {
-        // Prevent the click event from propagating to the row click event
+        // Prevent click event from propagating to row click event
         event.stopPropagation();
-        // Call the removeFromPlaylist function
+        // Call removeFromPlaylist function
         removeFromPlaylist(songId);
     });
 
@@ -99,7 +99,7 @@ function appendRemoveButton(row, songId) {
     row.appendChild(removeButtonCell);
 }
 
-// Update playlist count and average info
+// Update playlist song count and popularity average info
 function updatePlaylistSummary() {
     const playlistCount = document.querySelector("#playlist-count");
     const playlistAverage = document.querySelector("#playlist-average");
@@ -113,7 +113,7 @@ function updatePlaylistSummary() {
     playlistAverage.textContent = average;
 }
 
-// Calculate the average popularity of songs in the playlist
+// Calculate average popularity of songs in playlist
 function calculateAveragePopularity() {
     if (playlistData.length === 0) {
         return 0;
@@ -123,15 +123,16 @@ function calculateAveragePopularity() {
     return (totalPopularity / playlistData.length).toFixed(2); 
 }
 
-// Remove a song from the playlist
+// Remove a song from playlist
 function removeFromPlaylist(songId) {
     // Find index of song in playlistData array
     const index = playlistData.findIndex((song) => song.song_id === songId);
 
     // Remove song from playlistData array
     if (index !== -1) {
-        playlistData.splice(index, 1);
+        const removedSong = playlistData.splice(index, 1)[0]; // Remove and get the removed song
         updatePlaylistView();
+        console.log(`Song "${removedSong.title}" by ${removedSong.artist.name} has been removed from the playlist.`);
     }
 }
 
@@ -139,8 +140,6 @@ function removeFromPlaylist(songId) {
 function removeAllFromPlaylist() {
     // Clear playlistData array
     playlistData = [];
-
-    // Update view 
     updatePlaylistView();
     console.log("All songs removed from the playlist.");
 }
