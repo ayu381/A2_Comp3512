@@ -35,29 +35,29 @@ function showCredits() {
 }
 
 
-// Function to create the "Close View" button
+// Function to create Close View button
 function createCloseViewButton() {
     
     closeViewButton.id = "close-view-button";
     closeViewButton.textContent = "Close View";
 
-    // Event listener for the "Close View" button
+    // Event listener for Close View button
     closeViewButton.addEventListener("click", function () {
-        // Hide the single-song-view
+        // Hide single-song-view
         singleSongView.style.display = "none";
 
         // Show search-songs-view
         document.querySelector("#search-songs-view").style.display = "block";
 
-        // Remove "Close View" button from header
+        // Remove Close View button from header
         const closeButtonContainer = document.querySelector("#close-view-button-container");
         closeButtonContainer.textContent = "";
 
-        // Show "Playlist" button in the header
+        // Show Playlist button in the header
         playlistButton.style.display = "block";
     });
 
-    // Append "Close View" button to the header
+    // Append Close View button to header
     const closeButtonContainer = document.querySelector("#close-view-button-container");
     closeButtonContainer.appendChild(closeViewButton);
 }
@@ -68,29 +68,29 @@ function rowClicked(song, songsToDisplay) {
     const id = song.song_id;
     console.dir("song id=" + id);
 
-    // Get the song object from the id
+    // Get song object from the id
     const selectedSong = songsToDisplay.find((s) => s.song_id == id);
     console.log(selectedSong);
 
-    // Hide the playlist view
+    // Hide playlist view
     hidePlaylistView();
 
-    // Update song info and show the single-song-view
+    // Update song info and show single-song-view
     updateSongInfo(selectedSong);
     radarChart(selectedSong.analytics);
 
-    // Hide only the search-songs-view and show the single-song-view
+    // Hide only search-songs-view and show single-song-view
     document.querySelector("#search-songs-view").style.display = "none";
     singleSongView.style.display = "block";
 
-    // Show the "Close View" button dynamically in the header
+    // Show "Close View" button dynamically generated in header
     createCloseViewButton();
 
-    // Hide the "Playlist" button in the header
+    // Hide "Playlist" button in header
     playlistButton.style.display = "none";
 }
 
-// Function to hide the playlist view below song info
+// Function to hide playlist view below song info
 function hidePlaylistView() {
     searchSongsView.style.display = "block";
     playlistView.style.display = "none";
@@ -98,7 +98,7 @@ function hidePlaylistView() {
 }
 
 function updateSongInfo(selectedSong) {
-    // Display the song details
+    // Display song details
     const songInfoLine = document.querySelector("#song-info-line");
 
     const songTimeConvert = selectedSong.details.duration;
@@ -107,7 +107,7 @@ function updateSongInfo(selectedSong) {
     const durationSec = songTimeConvert % 60;
     const displayTime = durationMin + ':' + durationSec.toString().padStart(2, '0');
 
-    // Text Content in the SongInfo line
+    // Text content in SongInfoLine
     songInfoLine.textContent = `${selectedSong.title}, ${selectedSong.artist.name}, ${selectedSong.genre.name}, ${selectedSong.year}, ${displayTime}`;
 
     // Display analysis data
