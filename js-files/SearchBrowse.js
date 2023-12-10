@@ -373,8 +373,9 @@ function updateSortIndicator(header, sortOrder) {
     header.classList.add(sortOrder);
 }
 
+document.addEventListener('DOMContentLoaded', function() {
 // Call all needed functions when window is loaded
-window.onload = function () {
+
     // Load select form options
     artistOptions();
     genreOptions();
@@ -385,4 +386,5 @@ window.onload = function () {
 
     // Load arrow for title header
     updateSortIndicator(titleTh, sortTitleOrder);
-};
+
+});
