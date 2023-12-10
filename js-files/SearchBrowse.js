@@ -104,6 +104,7 @@ function displaySongs(songsToDisplay) {
     });
 }
 
+// Creates all the rows of each category
 function appendCreateCells(row, song) {
     row.appendChild(createCell(song.title));
     row.appendChild(createCell(song.artist.name));
@@ -117,11 +118,6 @@ function createCell(value) {
     const cell = document.createElement("td");
     cell.textContent = value;
     return cell;
-}
-
-// Add to playlist function
-function addToPlaylist(song) {
-    console.log("Adding to playlist:", song.title);
 }
 
 // Artist select options function
