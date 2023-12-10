@@ -47,6 +47,9 @@ function rowClicked(song, songsToDisplay) {
     const selectedSong = songsToDisplay.find((s) => s.song_id == id);
     console.log(selectedSong);
 
+    // Hide the playlist view
+    hidePlaylistView();
+
     // Update song info and show the single-song-view
     updateSongInfo(selectedSong);
     radarChart(selectedSong.analytics);
@@ -60,6 +63,13 @@ function rowClicked(song, songsToDisplay) {
 
     // Hide the "Playlist" button in the header
     playlistButton.style.display = "none";
+}
+
+// Function to hide the playlist view below song info
+function hidePlaylistView() {
+    searchSongsView.style.display = "block";
+    playlistView.style.display = "none";
+    playlistButton.textContent = "Playlist";
 }
 
 function updateSongInfo(selectedSong) {
