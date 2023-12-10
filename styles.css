@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f8f8; /* Light background color */
+    background-color: #f8f8f8;
 }
 
 header, footer {
@@ -12,15 +12,35 @@ header, footer {
     padding: 1em;
 }
 
-/* CSS for song search table */
-#search-songs-view {
+#header-buttons {
+    display: flex;   
+    justify-content: flex-start;
+    margin-left: 22%;
+}
+
+#playlist-button {
+    background-color: #3498db;
+    color: white;
+}
+
+#search-songs-view,
+#playlist-view,
+#single-song-view {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #fff; /* White background color */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+#playlist-button,
+#credits-button,
+#close-view-button-container {
+    margin-right: 10px; 
+    border-radius: 5px;
+}
+/* CSS for song search table */
 
 #search-results {
     margin-top: 20px;
@@ -51,14 +71,6 @@ th {
 }
 
 /* CSS for playlist table */
-#playlist-view {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
 
 #playlist-view table {
     width: 100%;
@@ -149,17 +161,17 @@ button {
 }
 
 #clear-button, #remove-all-button {
-    background-color: #02fa0a; /* Green */
+    background-color: #02fa0a; 
     color: white;
 }
 #search-button {
-    background-color: #02fa0a; /* Green */
+    background-color: #02fa0a; 
     color: white;
     margin-top: 15px;
 }
 
 #playlist-button {
-    background-color: #3498db; /* Blue */
+    background-color: #3498db; 
     color: white;
 }
 
@@ -174,15 +186,6 @@ button {
 }
 
 /* Single Song View Styling */
-
-#single-song-view {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
 
 #single-song-view h2 {
     color: #333;
@@ -216,6 +219,11 @@ button {
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: left;
+}
+
+#playlist-button,
+#credits-button {
+    margin-right: 10px; /* Adjust as needed */
 }
 
 
