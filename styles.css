@@ -162,12 +162,12 @@ th.sortable {
 /* Change the arrow direction based on the sorting order */
 .sortable.asc::after {
     border-width: 0 5px 5px 5px;
-    border-color: transparent transparent #0000FF transparent;
+    border-color: transparent transparent white transparent;
 }
 
 .sortable.desc::after {
     border-width: 5px 5px 0 5px;
-    border-color: #0000FF transparent transparent transparent;
+    border-color: white transparent transparent transparent;
 }
 
 /* Separate arrow indicators for title */
@@ -178,12 +178,12 @@ th.sortable {
 
 #title-th.sortable.asc::after {
     border-width: 5px 5px 0 5px;
-    border-color: #0000FF transparent transparent transparent;
+    border-color: white transparent transparent transparent;
 }
 
 #title-th.sortable.desc::after {
     border-width: 0 5px 5px 5px;
-    border-color: transparent transparent #0000FF transparent;
+    border-color: transparent transparent white transparent;
 }
 
 /* rounded buttons */
