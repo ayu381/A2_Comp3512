@@ -103,7 +103,7 @@ function radarChart(analytics) {
         datasets: [{
             label: 'Song Analytics',
             backgroundColor: 'gray',
-            borderColor: 'blue',
+            borderColor: '#02fa0a',
             data: [
                 analytics.bpm,
                 analytics.energy,
