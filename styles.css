@@ -1,4 +1,6 @@
+/* Body */
 body {
+
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -48,7 +50,7 @@ h1 {
 #search-songs-view,
 #playlist-view,
 #single-song-view {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
@@ -110,9 +112,15 @@ th {
     color: white;
 }
 
+/* Reduce width of title header and its cell*/
+#title-th,
+#search-results td:nth-child(1) {
+    width: 30%; 
+}
+
 /* playlist view table */
 #playlist-view table {
-    width: 100%;
+    width: 110%;
     margin-top: 10px;
     border-collapse: collapse;
 }
@@ -286,3 +294,5 @@ button {
     text-decoration: none;
     margin: 0 5px;
     }
+
+    
