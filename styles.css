@@ -18,14 +18,14 @@ header, footer {
 #header-buttons {
     display: flex;
     justify-content: flex-start;
-    margin-left: 21.5%;
+    margin-left: 14.5%;
 }
 
 /* Main title  */
 h1 {
     display: flex;
     justify-content: flex-start;
-    margin-left: 22.5%;
+    margin-left: 15%;
     margin-bottom: -10px;
 }
 
@@ -33,7 +33,7 @@ h1 {
 #creators {
     display: flex;
     justify-content: flex-start;
-    margin-left: 22.5%;
+    margin-left: 15.2%;
     margin-bottom: 30px;
 }
 
