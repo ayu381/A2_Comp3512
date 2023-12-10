@@ -15,7 +15,21 @@ header, footer {
 #header-buttons {
     display: flex;   
     justify-content: flex-start;
-    margin-left: 22%;
+    margin-left: 21.5%;
+}
+
+h1 {
+    display: flex;   
+    justify-content: flex-start;
+    margin-left: 22.5%;
+    margin-bottom: -10px;
+}
+
+#creators {
+    display: flex;   
+    justify-content: flex-start;
+    margin-left: 22.5%;
+    margin-bottom: 30px;
 }
 
 #playlist-button {
@@ -226,4 +240,8 @@ button {
     margin-right: 10px; /* Adjust as needed */
 }
 
-
+.footer-link {
+    color: #02fa0a;
+    text-decoration: none;
+    margin: 0 5px;
+}
