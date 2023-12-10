@@ -17,23 +17,20 @@ header, footer {
 /* Header buttons container */
 #header-buttons {
     display: flex;
-    justify-content: flex-start;
-    margin-left: 14.5%;
+    justify-content: center;
 }
 
 /* Main title  */
 h1 {
     display: flex;
-    justify-content: flex-start;
-    margin-left: 15%;
+    justify-content: center;
     margin-bottom: -10px;
 }
 
 /* Creators information */
 #creators {
     display: flex;
-    justify-content: flex-start;
-    margin-left: 15.2%;
+    justify-content: center;
     margin-bottom: 30px;
 }
 
