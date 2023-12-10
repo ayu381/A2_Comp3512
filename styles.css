@@ -215,9 +215,13 @@ button {
 }
 
 /* buttons */
-#clear-button,
 #remove-all-button {
     background-color: #02fa0a;
+    color: white;
+}
+
+#clear-button {
+    background-color: #c2cec2;
     color: white;
 }
 
